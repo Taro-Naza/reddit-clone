@@ -12,8 +12,18 @@
         "sourceType": "module"
     },
     "plugins": ["prettier"],
+    "settings": {
+        "import/resolver": {
+            "alias": {
+                "map": [
+                    ["@controllers", "./backend/controllers"]
+                ]
+            }
+        }
+    },
     "rules": {
         "prettier/prettier": "error",
+        "no-console": 0,
         "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
     }
 }

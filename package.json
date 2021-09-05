@@ -2,7 +2,6 @@
     "name": "reddit-clone",
     "version": "0.1.0",
     "private": true,
-    "type": "module",
     "dependencies": {
         "@testing-library/jest-dom": "^5.14.1",
         "@testing-library/react": "^11.2.7",
@@ -12,15 +11,17 @@
         "express": "^4.17.1",
         "react": "^17.0.2",
         "react-dom": "^17.0.2",
-        "react-scripts": "4.0.3",
+        "react-scripts": "^1.1.5",
         "web-vitals": "^1.1.2"
     },
     "scripts": {
         "start": "react-scripts start",
-        "serve": "node backend/index.js",
         "build": "react-scripts build",
         "test": "react-scripts test",
-        "eject": "react-scripts eject"
+        "eject": "react-scripts eject",
+        "be:watch": "nodemon --exec babel-node backend/index.js",
+        "be:build": "babel backend --out-dir buildBackend",
+        "be:serve": "node buildBackend/index.js"
     },
     "eslintConfig": {
         "extends": [
@@ -41,15 +42,22 @@
         ]
     },
     "devDependencies": {
+        "@babel/cli": "^7.15.4",
+        "@babel/core": "^7.15.5",
+        "@babel/node": "^7.15.4",
+        "@babel/preset-env": "^7.15.4",
         "babel-eslint": "^10.1.0",
+        "babel-plugin-module-resolver": "^4.1.0",
         "eslint": "^7.32.0",
         "eslint-config-airbnb": "^18.2.1",
         "eslint-config-prettier": "^8.3.0",
+        "eslint-import-resolver-alias": "^1.1.2",
         "eslint-plugin-import": "^2.24.2",
         "eslint-plugin-jsx-a11y": "^6.4.1",
         "eslint-plugin-prettier": "^3.4.1",
         "eslint-plugin-react": "^7.25.0",
         "eslint-plugin-react-hooks": "^4.2.0",
+        "nodemon": "^2.0.12",
         "prettier": "^2.3.2"
     }
 }
