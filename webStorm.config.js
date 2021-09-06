@@ -4,6 +4,6 @@ System.config({
         '@controllers/*': './backend/controllers/*',
         '@components/*': './src/components/*',
         '@pages/*': './src/pages/*',
-        '@models/*': './src/models/*'
+        '@models/*': './backend/models/*'
     }
 });
