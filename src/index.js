@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { ThemeProvider } from 'styled-components';
+import { HelmetProvider } from 'react-helmet-async';
 import App from './App';
 import { darkTheme } from './styles/theme';
 import reportWebVitals from './reportWebVitals';
@@ -8,7 +9,9 @@ import reportWebVitals from './reportWebVitals';
 ReactDOM.render(
     <React.StrictMode>
         <ThemeProvider theme={darkTheme}>
-            <App />
+            <HelmetProvider>
+                <App />
+            </HelmetProvider>
         </ThemeProvider>
     </React.StrictMode>,
     document.getElementById('root')
