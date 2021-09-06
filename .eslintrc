@@ -16,8 +16,11 @@
         "import/resolver": {
             "alias": {
                 "map": [
-                    ["@controllers", "./backend/controllers"]
-                ]
+                    ["@controllers", "./backend/controllers"],
+                    ["@components", "./src/components"],
+                    ["@pages", "./src/pages"]
+                ],
+                "extensions": [".js", ".jsx"]
             }
         }
     },

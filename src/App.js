@@ -1,9 +1,9 @@
 import React, { Suspense } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import NavBar from '@components/NavBar';
 import GlobalStyle from './styles/global';
-import NavBar from './components/NavBar';
 
-const HomePage = React.lazy(() => import('./pages/HomePage'));
+const HomePage = React.lazy(() => import('@pages/HomePage'));
 
 function App() {
     return (
