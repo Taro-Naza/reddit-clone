@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import pool from '../../database/database';
+import pool from '../database';
 import {
     addUser,
     checkEmailExist,
