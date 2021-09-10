@@ -24,7 +24,7 @@ class BaseModel {
      * @returns {Promise<*>}
      */
     fetchAll = async () => {
-        const sql = `SELECT * FROM ${this.getTableName()}`;
+        const sql = `SELECT * FROM "${this.getTableName()}"`;
         const data = await this.pool.query(sql);
 
         return data.rows;
@@ -37,7 +37,7 @@ class BaseModel {
      * @returns {Promise<*>}
      */
     fetchByID = async (id) => {
-        const sql = `SELECT * FROM ${this.getTableName()} WHERE id = ? LIMIT 1`;
+        const sql = `SELECT * FROM "${this.getTableName()}" WHERE id = $1  LIMIT 1`;
         const data = await this.pool.query(sql, [id]);
         if (data.rows.length > 0) {
             return data.rows[0];

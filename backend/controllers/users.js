@@ -1,5 +1,4 @@
 import { Router } from 'express';
-import pool from '../config/databaseConfig';
 import Users from '@models/users';
 
 const router = Router();
@@ -35,47 +34,16 @@ router.get('/:id', async (req, res) => {
 /**
  * adds a user.
  */
-
-router.post('/', (req, res) => {
-    const {
-        username,
-        firstName = null,
-        lastName = null,
-        birthDate = null,
-        password,
-        email,
-        avatarSm = null,
-        avatarMd = null,
-        avatarLg = null,
-        createdOn = Date.now(),
-        updatedOn = null,
-        lastLoginIP = req.ip,
-        isDeleted = false
-    } = req.body;
-
-    pool.query(checkEmailExist, [email])
-        .then((data) => {
-            if (data.rows.length > 0) {
-                return res.send("There's already a user with this email");
-            }
-            return pool.query(addUser, [
-                username,
-                firstName,
-                lastName,
-                birthDate,
-                password,
-                email,
-                avatarSm,
-                avatarMd,
-                avatarLg,
-                createdOn,
-                updatedOn,
-                lastLoginIP,
-                isDeleted
-            ]);
-        })
-        .then((data) => res.json({ success: true, data: data.rows }))
-        .catch((error) => res.send(error.stack));
+router.post('/', async (req, res) => {
+    const user = req.body;
+    const { ip } = req;
+    try {
+        const newUser = await Users.addUser(user, ip);
+        console.log('out of model');
+        res.json(newUser);
+    } catch (error) {
+        res.status(500);
+    }
 });
 
 export default router;
