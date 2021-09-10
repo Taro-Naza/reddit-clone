@@ -10,7 +10,7 @@ WITH
 CREATE USER reddit WITH PASSWORD '123456';
 GRANT ALL PRIVILEGES ON DATABASE reddit TO reddit;
 
-CREATE TABLE "user" (
+CREATE TABLE "user" (   
     id BIGSERIAL PRIMARY KEY,
     username VARCHAR (60) UNIQUE NOT NULL,
     first_name VARCHAR (60), 
@@ -21,14 +21,14 @@ CREATE TABLE "user" (
     avatar_sm VARCHAR (250),
     avatar_md VARCHAR (250),
     avatar_lg VARCHAR (250),
-    created_on TIMESTAMP NOT NULL,
-    updated_on TIMESTAMP,
+    created_on TIMESTAMP NOT NULL DEFAULT NOW()::DATE,
+    updated_on TIMESTAMP DEFAULT NOW()::DATE,
     last_login_ip INET NOT NULL,
-    is_deleted BOOLEAN
-)
+    is_deleted BOOLEAN DEFAULT FALSE
+);
 
-INSERT INTO "user" (username, first_name, last_name, birth_date, password, email, avatar_sm, avatar_md, avatar_lg, created_on, updated_on, last_login_ip, is_deleted)
-VALUES ('taro_naza', 'taro', 'naza', '1982/05/22', '1245236', 'taro@naza.com', 'url', 'url', 'url', '2021/09/06', null, '123.120.25.1', 'false' ),
-('jeffy1', 'jeff', 'bezos', '1954/02/01', 'amazonprime', 'jeffy1@amazon.com', 'url', 'url', 'url', '2021/09/06', null, '168.185.0.3', 'false' ),
-('johnpuppy', 'john', 'wick', '1975/10/08', 'puppy', 'john@wick.com', 'url', 'url', 'url', '2021/09/06', null, '0.0.0.0', 'false' ),
-('onepunchman', 'saitma', 'punchman', '1984/02/18', 'punchman', 'one@punch.com', 'url', 'url', 'url', '2021/09/06', null, '255.255.255.255', 'false' );
+INSERT INTO "user" (username, first_name, last_name, birth_date, password, email, avatar_sm, avatar_md, avatar_lg, last_login_ip)
+VALUES ('taro_naza', 'taro', 'naza', '1982/05/22', '1245236', 'taro@naza.com', 'url', 'url', 'url', '123.120.25.1'),
+('jeffy1', 'jeff', 'bezos', '1954/02/01', 'amazonprime', 'jeffy1@amazon.com', 'url', 'url', 'url', '168.185.0.3'),
+('johnpuppy', 'john', 'wick', '1975/10/08', 'puppy', 'john@wick.com', 'url', 'url', 'url', '0.0.0.0'),
+('onepunchman', 'saitma', 'punchman', '1984/02/18', 'punchman', 'one@punch.com', 'url', 'url', 'url', '255.255.255.255');
