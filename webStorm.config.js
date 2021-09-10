@@ -3,6 +3,7 @@ System.config({
     paths: {
         '@controllers/*': './backend/controllers/*',
         '@components/*': './src/components/*',
-        '@pages/*': './src/pages/*'
+        '@pages/*': './src/pages/*',
+        '@models/*': './backend/models/*'
     }
 });

@@ -1,35 +1,35 @@
 import { Router } from 'express';
-import pool from '../database';
-import {
-    addUser,
-    checkEmailExist,
-    getUserByID,
-    getUsers
-} from '../models/users';
+import pool from '../config/databaseConfig';
+import Users from '@models/users';
 
 const router = Router();
 
 /**
  * Returns a list of all users.
  */
-router.get('/', (req, res) => {
-    pool.query(getUsers)
-        .then((data) => res.json({ success: true, data: data.rows }))
-        .catch(() =>
-            res.status(500).json({ success: false, error: 'INTERNAL ERROR' })
-        );
+router.get('/', async (req, res) => {
+    try {
+        const rows = await Users.fetchAll();
+        res.json(rows);
+    } catch (error) {
+        console.error(error);
+        res.status(500);
+    }
 });
 
 /**
  * Returns a user by id.
  */
-router.get('/:id', (req, res) => {
+router.get('/:id', async (req, res) => {
     const { id } = req.params;
-    pool.query(getUserByID, [id])
-        .then((data) => res.json({ success: true, data: data.rows }))
-        .catch(() =>
-            res.status(500).json({ success: false, error: 'INTERNAL ERROR' })
-        );
+
+    try {
+        const row = await Users.fetchByID(id);
+        res.json(row);
+    } catch (error) {
+        console.error(error);
+        res.status(500);
+    }
 });
 
 /**
@@ -77,4 +77,5 @@ router.post('/', (req, res) => {
         .then((data) => res.json({ success: true, data: data.rows }))
         .catch((error) => res.send(error.stack));
 });
+
 export default router;

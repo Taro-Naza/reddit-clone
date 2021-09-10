@@ -3,6 +3,7 @@
         "browser": true,
         "es2021": true
     },
+    "parser": "@babel/eslint-parser",
     "extends": ["airbnb", "airbnb/hooks", "prettier"],
     "parserOptions": {
         "ecmaFeatures": {
@@ -18,7 +19,8 @@
                 "map": [
                     ["@controllers", "./backend/controllers"],
                     ["@components", "./src/components"],
-                    ["@pages", "./src/pages"]
+                    ["@pages", "./src/pages"],
+                    ["@models", "./backend/models"]
                 ],
                 "extensions": [".js", ".jsx"]
             }
@@ -27,6 +29,7 @@
     "rules": {
         "prettier/prettier": "error",
         "no-console": 0,
+        "arrow-body-style": ["error", "always"],
         "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
     }
 }
