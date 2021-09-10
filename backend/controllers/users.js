@@ -41,14 +41,14 @@ router.post('/', async (req, res) => {
     const emailExists = await Users.fetchByEmail(user.email);
     if (emailExists.length > 0) {
         return res
-            .status(202)
+            .status(409)
             .json('There is already an account with this email');
     }
 
     const usernameExists = await Users.fetchByUsername(user.username);
     if (usernameExists.length > 0) {
         return res
-            .status(202)
+            .status(409)
             .json('There is already a user with this username');
     }
 
