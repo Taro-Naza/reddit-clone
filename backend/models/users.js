@@ -39,8 +39,19 @@ class Users extends BaseModel {
             avatarLg,
             lastLoginIP
         ]);
-
         return { ...user, lastLoginIP };
+    };
+
+    fetchByEmail = async (email) => {
+        const sql = `SELECT * FROM "${this.getTableName()}" WHERE email = $1`;
+        const data = await this.pool.query(sql, [email]);
+        return data.rows;
+    };
+
+    fetchByUsername = async (username) => {
+        const sql = `SELECT * FROM "${this.getTableName()}" WHERE username = $1`;
+        const data = await this.pool.query(sql, [username]);
+        return data.rows;
     };
 }
 

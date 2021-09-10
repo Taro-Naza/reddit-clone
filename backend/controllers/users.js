@@ -37,13 +37,25 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
     const user = req.body;
     const { ip } = req;
+
+    const emailExists = await Users.fetchByEmail(user.email);
+    if (emailExists.length > 0) {
+        return res.send('There is already an account with this email');
+    }
+
+    const usernameExists = await Users.fetchByUsername(user.username);
+    if (usernameExists.length > 0) {
+        return res.send('There is already a user with this username');
+    }
+
     try {
         const newUser = await Users.addUser(user, ip);
-        console.log('out of model');
         res.json(newUser);
     } catch (error) {
+        console.error(error);
         res.status(500);
     }
+    return null;
 });
 
 export default router;
