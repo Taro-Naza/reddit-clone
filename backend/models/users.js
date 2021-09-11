@@ -43,6 +43,44 @@ class Users extends BaseModel {
         return { ...user, lastLoginIP };
     };
 
+    updateUser = async (id, body, user) => {
+        const {
+            username = user.username,
+            firstName = user.first_name,
+            lastName = user.last_name,
+            birthDate = user.birthdate,
+            password = user.password,
+            email = user.email,
+            avatarLg = user.avatar_lg,
+            updatedON = new Date().toISOString()
+        } = body;
+        const sql = `UPDATE "${this.getTableName()}" SET username = $1, first_name = $2, last_name = $3, birth_date = $4, password = $5, email = $6, avatar_lg = $7, updated_on = $8 WHERE id = $9;`;
+
+        await this.pool.query(sql, [
+            username,
+            firstName,
+            lastName,
+            birthDate,
+            password,
+            email,
+            avatarLg,
+            updatedON,
+            id
+        ]);
+
+        return {
+            id,
+            username,
+            firstName,
+            lastName,
+            birthDate,
+            password,
+            email,
+            avatarLg,
+            updatedON
+        };
+    };
+
     fetchByEmail = async (email) => {
         const sql = `SELECT * FROM "${this.getTableName()}" WHERE email = $1`;
         const data = await this.pool.query(sql, [email]);

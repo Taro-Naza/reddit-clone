@@ -73,4 +73,15 @@ router.delete('/:id', async (req, res) => {
     }
 });
 
+router.patch('/:id', async (req, res) => {
+    const { id } = req.params;
+    const { body } = req;
+    const user = await Users.fetchByID(id);
+    if (!user) {
+        return res.json("User doesn't exist");
+    }
+    const updatedUser = await Users.updateUser(id, body, user);
+    return res.json(updatedUser);
+});
+
 export default router;
