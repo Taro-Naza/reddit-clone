@@ -37,7 +37,7 @@ class BaseModel {
      * @returns {Promise<*>}
      */
     fetchByID = async (id) => {
-        const sql = `SELECT * FROM "${this.getTableName()}" WHERE id = $1  LIMIT 1`;
+        const sql = `SELECT * FROM "${this.getTableName()}" WHERE id = $1 LIMIT 1`;
         const data = await this.pool.query(sql, [id]);
         if (data.rows.length > 0) {
             return data.rows[0];
@@ -53,7 +53,7 @@ class BaseModel {
      * @returns {Promise<boolean>}
      */
     deleteByID = async (id) => {
-        const sql = `DELETE FROM ${this.getTableName()} WHERE id = ? LIMIT 1`;
+        const sql = `DELETE FROM "${this.getTableName()}" WHERE id = $1`;
         await this.pool.query(sql, [id]);
 
         return true;

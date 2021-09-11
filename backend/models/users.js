@@ -13,6 +13,7 @@ class Users extends BaseModel {
     };
 
     addUser = async (user, ipAddress) => {
+        console.log(user);
         const {
             username,
             firstName,

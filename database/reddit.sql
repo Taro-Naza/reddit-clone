@@ -23,8 +23,7 @@ CREATE TABLE "user" (
     avatar_lg VARCHAR (250),
     created_on TIMESTAMP NOT NULL DEFAULT NOW()::DATE,
     updated_on TIMESTAMP DEFAULT NOW()::DATE,
-    last_login_ip INET NOT NULL,
-    is_deleted BOOLEAN DEFAULT FALSE
+    last_login_ip INET NOT NULL
 );
 
 INSERT INTO "user" (username, first_name, last_name, birth_date, password, email, avatar_sm, avatar_md, avatar_lg, last_login_ip)

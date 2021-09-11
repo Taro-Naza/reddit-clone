@@ -62,4 +62,15 @@ router.post('/', async (req, res) => {
     return null;
 });
 
+router.delete('/:id', async (req, res) => {
+    const { id } = req.params;
+    try {
+        await Users.deleteByID(id);
+        res.json('User Deleted');
+    } catch (error) {
+        console.log(error);
+        res.status(500);
+    }
+});
+
 export default router;
