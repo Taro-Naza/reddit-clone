@@ -10,7 +10,10 @@
             "jsx": true
         },
         "ecmaVersion": 12,
-        "sourceType": "module"
+        "sourceType": "module",
+        "babelOptions": {
+            "presets": ["@babel/preset-react"]
+        }
     },
     "plugins": ["prettier"],
     "settings": {
