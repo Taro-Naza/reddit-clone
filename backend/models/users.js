@@ -12,7 +12,7 @@ class Users extends BaseModel {
         return 'user';
     };
 
-    addUser = async (user, ipAddress) => {
+    add = async (user, ipAddress) => {
         console.log(user);
         const {
             username,
@@ -43,7 +43,12 @@ class Users extends BaseModel {
         return { ...user, lastLoginIP };
     };
 
-    updateUser = async (id, body, user) => {
+    update = async (id, body) => {
+        const user = await this.fetchByID(id);
+        if (!user) {
+            throw new Error("User doesn't exist");
+        }
+        console.log('passed the user check');
         const {
             username = user.username,
             firstName = user.first_name,

@@ -10,8 +10,8 @@ router.get('/', async (req, res) => {
     try {
         const rows = await Users.fetchAll();
         res.json(rows);
-    } catch (error) {
-        console.error(error);
+    } catch (err) {
+        console.error(err);
         res.status(500);
     }
 });
@@ -25,8 +25,8 @@ router.get('/:id', async (req, res) => {
     try {
         const row = await Users.fetchByID(id);
         res.json(row);
-    } catch (error) {
-        console.error(error);
+    } catch (err) {
+        console.error(err);
         res.status(500);
     }
 });
@@ -55,8 +55,8 @@ router.post('/', async (req, res) => {
     try {
         const newUser = await Users.addUser(user, ip);
         res.json(newUser);
-    } catch (error) {
-        console.error(error);
+    } catch (err) {
+        console.error(err);
         res.status(500);
     }
     return null;
@@ -67,8 +67,8 @@ router.delete('/:id', async (req, res) => {
     try {
         await Users.deleteByID(id);
         res.json('User Deleted');
-    } catch (error) {
-        console.log(error);
+    } catch (err) {
+        console.error(err);
         res.status(500);
     }
 });
@@ -76,12 +76,13 @@ router.delete('/:id', async (req, res) => {
 router.patch('/:id', async (req, res) => {
     const { id } = req.params;
     const { body } = req;
-    const user = await Users.fetchByID(id);
-    if (!user) {
-        return res.json("User doesn't exist");
+
+    try {
+        const updatedUser = await Users.update(id, body);
+        res.json(updatedUser);
+    } catch (err) {
+        res.status(500).json(err);
     }
-    const updatedUser = await Users.updateUser(id, body, user);
-    return res.json(updatedUser);
 });
 
 export default router;
