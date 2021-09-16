@@ -56,10 +56,9 @@ class Users extends BaseModel {
             birthDate = user.birthdate,
             password = user.password,
             email = user.email,
-            avatarLg = user.avatar_lg,
-            updatedON = new Date().toISOString()
+            avatarLg = user.avatar_lg
         } = body;
-        const sql = `UPDATE "${this.getTableName()}" SET username = $1, first_name = $2, last_name = $3, birth_date = $4, password = $5, email = $6, avatar_lg = $7, updated_on = $8 WHERE id = $9;`;
+        const sql = `UPDATE "${this.getTableName()}" SET username = $1, first_name = $2, last_name = $3, birth_date = $4, password = $5, email = $6, avatar_lg = $7, updated_on = now() WHERE id = $8;`;
 
         await this.pool.query(sql, [
             username,
@@ -69,7 +68,6 @@ class Users extends BaseModel {
             password,
             email,
             avatarLg,
-            updatedON,
             id
         ]);
 
@@ -81,8 +79,7 @@ class Users extends BaseModel {
             birthDate,
             password,
             email,
-            avatarLg,
-            updatedON
+            avatarLg
         };
     };
 
